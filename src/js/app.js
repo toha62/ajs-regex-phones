@@ -1,9 +1,22 @@
-export default class Validator {
-  constructor(name) {
-    this.name = name;
+export default class Phone {
+  constructor(phone) {
+    this.phone = phone;
   }
 
-  validateUserName() {
-    return /^[a-zA-Z]\d{0,3}?([a-zA-Z_-]|[a-zA-Z_-]\d{0,3})*[a-zA-Z]$/.test(this.name);
+  getFormatedPhone() {
+    const reResult = /[+]?\s*(\d+)\s*[-]?[(]?(\d{3})[)]?\s*[-]?(\d+)\s*[-]?(\d+)\s*[-]?(\d+)/.exec(this.phone);
+    const formattedPhone = ['+'];
+
+    if (this.phone.trim().startsWith('+')) {
+      formattedPhone.push(reResult[1]);
+    } else {
+      formattedPhone.push('7');
+    }
+
+    for (let i = 2; i < reResult.length; i += 1) {
+      formattedPhone.push(reResult[i]);
+    }
+
+    return formattedPhone.join('');
   }
 }
