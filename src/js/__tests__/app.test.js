@@ -1,21 +1,15 @@
-import Validator from '../app';
+import Phone from '../app';
 
 test.each([
-  ['-petr', false],
-  ['_petr', false],
-  ['22petr', false],
-  ['petr33', false],
-  ['petr-', false],
-  ['petr_', false],
-  ['1petr', false],
-  ['petr6', false],
-  ['Вася', false],
-  ['pe5t5896r', false],
-  ['Mas-ha777co_ol55girl', true],
-  ['M777asha-cool_gir-8l', true],
-  ['M7-ashA-c00l_gir-18l', true],
-])('for nickname %s should return %s"', (name, result) => {
-  const validator = new Validator(name);
+  ['8 (927) 123-34-67', '+79271233467'],
+  ['8(927)123-34-67', '+79271233467'],
+  ['8-( 927 ) 123-34-67', '+79271233467'],
+  ['8-927-123-34-67', '+79271233467'],
+  [' + 7 960 000  00 09  ', '+79600000009'],
+  ['+7-960 000- 00 09  ', '+79600000009'],
+  ['+86 000 000 -0009', '+860000000009'],
+])('for phone number %s should return formatted phone %s"', (phoneNumber, result) => {
+  const phone = new Phone(phoneNumber);
 
-  expect(validator.validateUserName()).toEqual(result);
+  expect(phone.getFormatedPhone()).toBe(result);
 });

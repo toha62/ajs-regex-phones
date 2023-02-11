@@ -1,13 +1,13 @@
 export default class Phone {
-  constructor(phone) {
-    this.phone = phone;
+  constructor(phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   getFormatedPhone() {
-    const reResult = /[+]?\s*(\d+)\s*[-]?[(]?(\d{3})[)]?\s*[-]?(\d+)\s*[-]?(\d+)\s*[-]?(\d+)/.exec(this.phone);
+    const reResult = /[+]?\s*(\d+)[-\s]*[(]?\s*(\d{3})\s*[)]?[-\s]*(\d+)[-\s]*(\d+)[-\s]*(\d+)/.exec(this.phoneNumber);
     const formattedPhone = ['+'];
 
-    if (this.phone.trim().startsWith('+')) {
+    if (this.phoneNumber.trim().startsWith('+')) {
       formattedPhone.push(reResult[1]);
     } else {
       formattedPhone.push('7');
